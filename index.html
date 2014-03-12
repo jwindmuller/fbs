@@ -1,0 +1,61 @@
+<html>
+	<head>
+	    <meta charset="utf-8" />
+		<link rel="stylesheet" href="search.css" />
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Search</h1>
+			<form action="#" id="fb">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="highlighted">
+							<div class="input big">
+								<label for="search">Search</label>
+								<input type="text" id="search" name="search" class="search">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="highlighted">
+							<h3>Case status</h3>
+							<div class="input status">
+								<input name="StatusClosed" id="StatusClosed" type="checkbox" value="closed">
+								<label for="StatusClosed">Closed Cases</label>
+							</div>
+							<div class="input status">
+								<input name="StatusActive" id="StatusActive" type="checkbox" value="active" checked="checked">
+								<label for="StatusActive">Active Cases</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="highlighted">
+							<h3>Project</h3>
+							<div class="input project">
+								<input name="ProjectDev" id="ProjectDev" type="checkbox" value="Development" checked="checked">
+								<label for="ProjectDev">Development</label>
+							</div>
+							<div class="input project">
+								<input name="ProjectCube" id="ProjectCube" type="checkbox" value="Support for Cube">
+								<label for="ProjectCube">Support for Cube</label>
+							</div>
+							<div class="input project">
+								<input name="ProjectTelco" id="ProjectTelco" type="checkbox" value="Support for Telco">
+								<label for="ProjectTelco">Support for Telco</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						
+					</div>
+				</div>
+			</form>
+		</div>
+		<script src="search.js"></script>
+	</body>
+</html>

@@ -1,4 +1,4 @@
-fbs
-===
+FogBugz Search
+==============
 
-FogBugz search
+Simple web page to launch searches in FogBugz.

@@ -1,0 +1,24 @@
+.row {
+	margin-bottom:1em;
+}
+
+.highlighted {
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1;
+	color: #555;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+.highlighted h3 {
+	margin-top:5px;
+}
+.big label {
+	display: none;
+}
+input.search {
+	font-size:1.6em;
+	width:100%;
+}
