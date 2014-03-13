@@ -78,6 +78,7 @@
 				});
 		};
 		acDD.empty();
+		updateSearchPreview();
 	}
 
 	function removeLastWord() {
@@ -118,7 +119,12 @@
 		acDD.empty();
 		matches.each(function(i, item) {
 			var container = $('<div class="ac" />');
-			container.html(item.value);
+			container
+				.html(item.value)
+				.mouseover(function(event) {
+					$(this).siblings().removeClass('selected');
+					$(this).addClass('selected');
+				});
 			acDD.append(container);
 		});
 		acDD.show();
@@ -195,13 +201,20 @@
 					event.preventDefault();
 					this.blur();
 				};
-				updateSearchPreview();
 			})
 			.blur(function() {
 				hideAutoComplete(true);
 			});
 		hideAutoComplete();
 		loadAutoCompleteOptions();
+		acOptions.click(function() {
+			updateSearchPreview();
+		});
+		acOptions.filter(function(i, item) {
+			return item.nodeName == 'OPTION';
+		}).parent().change(function() {
+			updateSearchPreview();
+		});
 	}
 })(jQuery);
 
