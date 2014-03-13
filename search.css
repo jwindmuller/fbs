@@ -12,6 +12,14 @@
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
+@media (max-width: 990px) {
+	.highlighted {
+		margin-bottom: 1em
+	}
+	.row {
+		margin-bottom: 0
+	}
+}
 .highlighted h3 {
 	margin-top:5px;
 }
