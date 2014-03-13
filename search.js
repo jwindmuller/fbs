@@ -68,7 +68,12 @@
 			};
 
 			removeLastWord();
-			searchBar.focus();
+			searchBar
+				.delay(100)
+				.queue(function(nxt) {
+					$(this).focus();
+				});
+			console.debug(searchBar);
 		};
 	}
 
