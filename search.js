@@ -128,7 +128,7 @@
 			acDD.append(container);
 		});
 		acDD.show();
-		autoCompleteSelectOption();
+		autoCompleteSelectOption(1);
 	}
 
 	function loadAutoCompleteOptions() {
@@ -153,7 +153,20 @@
 				};
 			}
 		}
-
+		var currentTop = current.position().top;
+		if (currentTop + current.height() > acDD.height() || currentTop < 0) {
+			if (currentTop > 0) {
+				var diff = acDD.height() - currentTop;
+				acDD.scrollTop(
+					acDD.scrollTop() + current.height() - diff
+				);
+			} else {
+				acDD.scrollTop(
+					acDD.scrollTop() + currentTop
+				);
+			}
+			
+		};
 		current.addClass('selected');
 	}
 

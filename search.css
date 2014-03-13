@@ -52,16 +52,18 @@ select {
 	border-top:none;
 	font-size:1.5em;
 	z-index: 1;
-	padding:0 0 0.5em;
-	max-height:300px;
+	padding:0;
+	max-height:200px;
 	overflow: auto;
 }
 
 .dd .ac {
 	-webkit-transition: all 0.3s; /* For Safari 3.1 to 6.0 */
 	transition: all 0.3s;
-	padding:0.5em 0 0 0.2em;
 	border-bottom:#ccc 1px solid;
+	height:1.5em;
+	line-height:1.9em;
+	padding: 0 0.1em
 }
 .dd .selected {
 	background: orange;
