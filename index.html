@@ -14,21 +14,25 @@
 						<div class="highlighted">
 							<div class="input big">
 								<label for="search">Search</label>
-								<input type="text" id="search" name="search" class="search">
+								<input type="text" id="search" name="search" class="search" autocomplete="off" autofocus>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row r1">
 					<div class="col-md-4">
 						<div class="highlighted">
-							<h3>Case status</h3>
+							<h3>Status</h3>
+							<div class="input status">
+								<input name="StatusActive" id="StatusOpen" type="checkbox" value="open" checked="checked">
+								<label for="StatusActive">Open Cases</label>
+							</div>
 							<div class="input status">
 								<input name="StatusClosed" id="StatusClosed" type="checkbox" value="closed">
 								<label for="StatusClosed">Closed Cases</label>
 							</div>
 							<div class="input status">
-								<input name="StatusActive" id="StatusActive" type="checkbox" value="active" checked="checked">
+								<input name="StatusActive" id="StatusActive" type="checkbox" value="active">
 								<label for="StatusActive">Active Cases</label>
 							</div>
 						</div>
@@ -51,7 +55,31 @@
 						</div>
 					</div>
 					<div class="col-md-4">
-						
+						<div class="highlighted">
+							<h3>Assigned</h3>
+							<div class="input assignments">
+								<select multiple="true" name="AssignedTo">
+									<option value="">Any...</option>
+									<option value="Dave Heinrichs">Dave Heinrichs</option>
+									<option value="Jade Ohlhauser">Jade Ohlhauser</option>
+									<option value="Jeremy Wilcox">Jeremy Wilcox</option>
+									<option value="Joaquin Windmüller">Joaquin Windmüller</option>
+									<option value="Roger Balm">Roger Balm</option>
+									<option value="Tai Huynh">Tai Huynh</option>
+									<option value="Thierry Geoffroy-Chateau">Thierry Geoffroy-Chateau</option>
+									<option value="Tom Kenny">Tom Kenny</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="highlighted">
+							<div class="input big submit">
+								<input type="submit" value="Search">
+							</div>
+						</div>
 					</div>
 				</div>
 			</form>
