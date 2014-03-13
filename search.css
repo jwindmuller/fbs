@@ -45,10 +45,11 @@ select {
 
 .dd {
 	position: absolute;
-	top: 38px;
+	top: 32px;
 	background: #fff;
 	width: 100%;
 	border: #ccc 1px solid;
+	border-top:none;
 	font-size:1.5em;
 	z-index: 1;
 	padding:0 0 0.5em;
@@ -64,4 +65,8 @@ select {
 }
 .dd .selected {
 	background: orange;
+}
+.preview {
+	font-size:0.8em;
+	margin-top: .5em
 }

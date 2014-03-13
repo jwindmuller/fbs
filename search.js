@@ -5,10 +5,12 @@
 	var acOptions = [];
 	var acPrevLastWord = "";
 
-	function buildSearchString(form) {
+	function buildSearchString(form, paramsOnly) {
 		var searchStr =
-			fbSearchURL +
-			"&searchFor=" + $('input.search').val() +
+			(paramsOnly ? '' : 
+				fbSearchURL + "&searchFor=" 
+			) +
+			$('input.search').val() +
 			buildSearchFromInputs(
 				'Status',
 				$(form).find('.input.status input:checked')
@@ -61,10 +63,10 @@
 			};
 			var element = $(matches[0]);
 			if (element.is('input')) {
-				matches.attr('checked', !matches.attr('checked'));;
+				element.prop('checked', !element.prop('checked'));;
 			}
 			if (element.is('option')) {
-				matches.attr('selected', !matches.attr('selected'));;
+				element.prop('selected', !element.prop('selected'));;
 			};
 
 			removeLastWord();
@@ -72,9 +74,10 @@
 				.delay(100)
 				.queue(function(nxt) {
 					$(this).focus();
+					nxt();
 				});
-			console.debug(searchBar);
 		};
+		acDD.empty();
 	}
 
 	function removeLastWord() {
@@ -148,6 +151,11 @@
 		current.addClass('selected');
 	}
 
+	function updateSearchPreview() {
+		var preview = $('#preview');
+		preview.text(buildSearchString(preview.parents('form'), true));
+	}
+
 	$.fn.fbSearch = function() {
 		searchBar = this;
 
@@ -187,6 +195,7 @@
 					event.preventDefault();
 					this.blur();
 				};
+				updateSearchPreview();
 			})
 			.blur(function() {
 				hideAutoComplete(true);
