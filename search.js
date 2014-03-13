@@ -201,6 +201,7 @@
 					event.preventDefault();
 					this.blur();
 				};
+				updateSearchPreview();
 			})
 			.blur(function() {
 				hideAutoComplete(true);
