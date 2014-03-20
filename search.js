@@ -6,10 +6,8 @@
 	var acPrevLastWord = "";
 
 	function buildSearchString(form, paramsOnly) {
-		var searchStr =
-			(paramsOnly ? '' : 
-				fbSearchURL + "&searchFor=" 
-			) +
+		var base = fbSearchURL + "&searchFor="
+		var params =
 			$('input.search').val() +
 			buildSearchFromInputs(
 				'Status',
@@ -33,9 +31,14 @@
 				' '
 			) +
 			"";
-			
 
-		return searchStr;
+		if (paramsOnly) {
+			base = "";
+		} else {
+			params = encodeURIComponent(params);
+		}
+
+		return base + params;
 	}
 
 	function buildSearchFromInputs(term, inputs, joinBy) {
@@ -212,6 +215,18 @@
 		preview.text(buildSearchString(preview.parents('form'), true));
 	}
 
+	function setupKeyboard(searchBar) {
+		$(window).keydown(function(event) {
+			var isForwardSlash = event.keyCode === 191;
+			var isCtrlF = event.keyCode == 17 && event.ctrlKey;
+			var isSearch = isForwardSlash || isCtrlF ;
+			if (isSearch) {
+				searchBar.focus();
+			};
+		});
+		console.debug(searchBar);
+	}
+
 	$.fn.fbSearch = function() {
 		searchBar = this;
 
@@ -266,6 +281,8 @@
 		}).parent().change(function() {
 			updateSearchPreview();
 		});
+
+		setupKeyboard(searchBar);
 	}
 })(jQuery);
 
