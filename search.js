@@ -20,25 +20,39 @@
 				$(form).find('.input.project input:checked')
 			) +
 			buildSearchFromInputs(
+				'EditedBy',
+				$(form).find('.input.editors option:selected')
+			) +
+			buildSearchFromInputs(
 				'AssignedTo',
 				$(form).find('.input.assignments option:selected')
 			) +
-			' OrderBy:"-Case"'
+			buildSearchFromInputs(
+				'OrderBy',
+				$(form).find('.sorting input:checked'),
+				' '
+			) +
 			"";
 			
 
 		return searchStr;
 	}
 
-	function buildSearchFromInputs(term, inputs) {
+	function buildSearchFromInputs(term, inputs, joinBy) {
+		if (!joinBy) {
+			joinBy = ' OR ';
+		};
 		var c = $.merge([],
 			inputs.map(function() {
+				if (this.value === '') {
+					return '';
+				}
 				return term + ':"' + this.value + '"';
 			})
 		);
 		var search = "";
 		if (c.length > 0) {
-			search = " (" + c.join(' OR ') + ")"
+			search = " (" + c.join(joinBy) + ")"
 		};
 		return search;
 	}
@@ -56,8 +70,10 @@
 		acPrevLastWord = "";
 		selectValue = selectValue === true;
 		if (selectValue) {
-			var selected = acDD.children('.selected').text();
-			var matches = inputsWithWord(selected);
+			var selectedText = acDD.children('.selected').text();
+			var title    = selectedText.replace(/([^:]+):(.*)/, '$1').trim();
+			var selected = selectedText.replace(/([^:]+):(.*)/, '$2').trim();
+			var matches = inputsWithWord(selected, true, title);
 			if (matches.length == 0) {
 				return;
 			};
@@ -93,17 +109,37 @@
 		return str.split(/\s+/).pop().trim();
 	}
 
-	function inputsWithWord(word) {
+	function inputsWithWord(word, exact, title) {
 		word = word.trim().toUpperCase();
 		return acOptions.filter(function(i, item) {
 			if (word.trim().length == 0) {
 				return false;
 			};
+			if (title) {
+				var titleForItem = titleForInput( $(item) );//.parents('.input').prev().text().trim();
+				if (titleForItem !== title) {
+					return false;
+				}
+			}
 			var val = item.value.toUpperCase();
+			if (exact === true) {
+				return val === word;
+			};
 			return val.indexOf(word) >= 0;
 		});
 	}
 
+	function titleForInput(input) {
+		var wrapper = input.parents('.input');
+		var title   = wrapper.prevAll('h3');
+		if (!title.length) {
+			title = wrapper.prevAll('h4');
+		}
+		if (!title.length) {
+			title = wrapper.parents('h3');
+		}
+		return title.text().trim();
+	}
 	function showAutoComplete(lastWord) {
 		lastWord = lastWord.toUpperCase();
 		if (acPrevLastWord == lastWord) {
@@ -118,9 +154,10 @@
 		};
 		acDD.empty();
 		matches.each(function(i, item) {
+			var title = titleForInput($(item));
 			var container = $('<div class="ac" />');
 			container
-				.html(item.value)
+				.html(title + ": " + item.value)
 				.mouseover(function(event) {
 					$(this).siblings().removeClass('selected');
 					$(this).addClass('selected');
